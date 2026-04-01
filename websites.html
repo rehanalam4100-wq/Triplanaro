@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Indian Tourism Explorer</title>
+<link rel="icon" type="image/png" href="trip logo.png">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0077b6;
+    color: white;
+    padding: 15px;
+}
+
+header img {
+    width: 50px;
+    margin-right: 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* GRID */
+.container {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* IMAGE */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* CONTENT */
+.card h3 {
+    margin: 15px 0 10px;
+}
+
+.btn {
+    display: inline-block;
+    margin: 10px 0 20px;
+    padding: 10px 18px;
+    background: #0077b6;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #023e8a;
+}
+.back-container{
+padding:20px;
+}
+
+.back-btn{
+padding:10px 20px;
+background:#0077b6;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+.back-btn:hover{
+background:#023e8a;
+}
+</style>
+<script>
+
+function goBack(){
+window.location.href="example.html";
+}
+
+</script>
+
+</head>
+<body>
+
+<header>
+    <!-- LOGO -->
+    <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="logo">
+    <h1>Explore India Tourism</h1>
+</header>
+<div class="back-container">
+<button onclick="goBack()" class="back-btn">← Back</button>
+</div>
+
+<div class="container">
+
+    <!-- TELANGANA -->
+    <div class="card">
+        <img src="telangana.jpg" alt="Telangana">
+        <h3>Telangana</h3>
+        <a href="https://tourism.telangana.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- RAJASTHAN -->
+    <div class="card">
+        <img src="rajasthan.jpg" alt="Rajasthan">
+        <h3>Rajasthan</h3>
+        <a href="https://www.tourism.rajasthan.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- KERALA -->
+    <div class="card">
+        <img src="kerala.jpg" alt="Kerala">
+        <h3>Kerala</h3>
+        <a href="https://www.keralatourism.org/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- HIMACHAL -->
+    <div class="card">
+        <img src="himachal.jpg" alt="Himachal Pradesh">
+        <h3>Himachal Pradesh</h3>
+        <a href="https://himachaltourism.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- MAHARASHTRA -->
+    <div class="card">
+        <img src="maharastra.jpg" alt="Maharashtra">
+        <h3>Maharashtra</h3>
+        <a href="https://maharashtratourism.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- GOA -->
+    <div class="card">
+        <img src="goa.jpg" alt="Goa">
+        <h3>Goa</h3>
+        <a href="https://goa-tourism.com/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- MUMBAI -->
+    <div class="card">
+        <img src="mumbai.jpg" alt="Mumbai">
+        <h3>Mumbai</h3>
+        <a href="https://maharashtratourism.gov.in/destination/mumbai/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- SIKKIM -->
+    <div class="card">
+        <img src="sikkim.jpg" alt="Sikkim">
+        <h3>Sikkim</h3>
+        <a href="https://www.sikkimtourism.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- KASHMIR -->
+    <div class="card">
+        <img src="kashmir.jpg" alt="Kashmir">
+        <h3>Kashmir</h3>
+        <a href="http://jammutourism.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- UTTARAKHAND -->
+    <div class="card">
+        <img src="uttarakhand.jpg" alt="Uttarakhand">
+        <h3>Uttarakhand</h3>
+        <a href="https://uttarakhandtourism.gov.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+    <div style="text-align:center; margin:40px;">
+<a href="thankyou.html">
+<button style="padding:12px 25px;font-size:16px;background:#0077b6;color:white;border:none;border-radius:8px;">
+Finish
+</button>
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
