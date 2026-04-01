@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Triplanaro - Explore States</title>
+<link rel="icon" type="image/png" href="trip logo.png">
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+color:rgb(229, 37, 37);
+height:100vh;
+
+/* High Quality Background */
+background: 
+linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+url("india.jpg");
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+header{
+text-align:center;
+padding:20px;
+font-size:35px;
+font-weight:bold;
+}
+
+.container{
+text-align:center;
+margin:30px;
+}
+
+select{
+padding:12px;
+font-size:18px;
+border-radius:8px;
+border:none;
+}
+
+.places{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:40px;
+}
+
+.card{
+background:white;
+color:black;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:170px;
+object-fit:cover;
+}
+
+/* POPUP WINDOW */
+
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:600px;
+max-height:80vh;
+overflow:auto;
+background:white;
+color:black;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+display:none;
+z-index:1000;
+cursor:move;
+}
+
+.popup img{
+width:120px;
+height:90px;
+margin:5px;
+object-fit:cover;
+border-radius:6px;
+}
+
+.popup h2{
+margin-top:0;
+}
+
+.closebtn{
+float:right;
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+cursor:pointer;
+}
+.stateBtn{
+padding:12px 25px;
+font-size:18px;
+background:#0077b6;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.stateBtn:hover{
+background:#023e8a;
+}
+.back-container{
+padding:15px 30px;
+}
+
+.back-btn{
+padding:10px 22px;
+background:linear-gradient(135deg,#0077b6,#00b4d8);
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+font-weight:500;
+transition:0.3s;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.back-btn:hover{
+transform:translateY(-2px);
+background:linear-gradient(135deg,#023e8a,#0077b6);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>Explore India's Famous Places</header>
+
+<div class="back-container">
+<button onclick="goBack()" class="back-btn">← Back to Home</button>
+</div>
+
+<div class="container">
+
+<select onchange="showPlaces(this.value)">
+<option value="">Choose State</option>
+<option value="telangana">Telangana</option>
+<option value="rajasthan">Rajasthan</option>
+<option value="kerala">Kerala</option>
+<option value="himachal">Himachal Pradesh</option>
+<option value="sikkim">Sikkim</option>
+<option value="kashmir">Jammu & Kashmir</option>
+
+</select>
+<br><br>
+
+<a href="websites.html">
+<button class="stateBtn">State Tourism</button>
+</a>
+
+</div>
+
+<div class="places" id="placesContainer"></div>
+
+<!-- POPUP INFO WINDOW -->
+
+<div id="popup" class="popup">
+
+<button class="closebtn" onclick="closePopup()">X</button>
+
+<h2 id="popupTitle"></h2>
+
+<div id="popupImages"></div>
+
+<p id="popupText"></p>
+
+</div>
+
+
+<!-- IMAGE VIEWER POPUP -->
+
+<div id="imageViewer" class="popup" style="width:500px; display:none;">
+
+<button class="closebtn" onclick="closeImageViewer()">X</button>
+
+<div style="text-align:center">
+<img id="viewerImg" style="width:100%; border-radius:8px;">
+</div>
+
+</div>
+
+<script>
+
+
+function goBack(){
+window.location.href="first page.html";
+}
+
+/* DATA */
+
+const data={
+
+    
+telangana:[
+
+{
+name:"Charminar",
+img:"charminar.jpg",
+
+gallery:[
+"char1.jpg",
+"char2.jpg",
+"char3.jpg",
+"char4.jpg"
+],
+
+info:`
+
+Charminar is one of the most famous monuments in India and a major symbol of Hyderabad. It was built in the year 1591 by Sultan Muhammad Quli Qutb Shah, the founder of Hyderabad. The structure was built to commemorate the end of a deadly plague that had affected the city.
+
+The monument features four grand arches facing the four directions of the city. At each corner of the structure stands a tall minaret that rises to about 56 meters high. These minarets are beautifully decorated with balconies and Islamic architectural patterns.
+
+Charminar has become one of the busiest tourist spots in Telangana. The surrounding area is famous for its traditional markets like Laad Bazaar, where visitors can buy bangles, pearls, and local handicrafts.
+
+Today Charminar is not only a historical monument but also a cultural landmark that represents the heritage and identity of Hyderabad.
+
+<br><br>
+
+🔗 <a href="https://en.wikipedia.org/wiki/Charminar" target="_blank">
+Visit Official Website
+</a>
+`
+
+},
+
+{
+  name: "Golconda Fort",
+  img: "golconda.jpg",
+
+  gallery: [
+    "gol1.jpg",
+    "gol2.jpg",
+    "gol3.jpg",
+    "gol4.jpg"
+  ],
+
+  info: `
+  Golconda Fort is a magnificent historical fortress located in Hyderabad. It was originally built during the Kakatiya dynasty and later expanded by the Qutb Shahi rulers in the 16th century.
+
+  <br><br>
+
+  The fort is famous for its advanced acoustic system. A clap at the entrance gate can be heard clearly at the top of the hill.
+
+  <br><br>
+
+  Golconda was also known for its diamond mines which produced famous diamonds like the Koh-i-Noor.
+
+  <br><br>
+
+  Today the fort is one of the most visited tourist destinations in Telangana and hosts a popular evening light and sound show.
+
+  <br><br>
+
+  🔗 <a href="https://en.wikipedia.org/wiki/Golconda" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+  `
+},
+
+{
+  name: "Ramoji Film City",
+  img: "ramoji.jpg",
+
+  gallery: [
+    "ramo1.jpg",
+    "ramo2.jpg",
+    "ramo3.jpg",
+    "ramo4.jpg"
+  ],
+
+  info: `
+  Ramoji Film City is one of the largest film studio complexes in the world and is located near Hyderabad in Telangana. It was established in 1996 by media entrepreneur Ramoji Rao.
+
+  <br><br>
+
+  The studio spans more than 2000 acres and is recognized by Guinness World Records.
+
+  <br><br>
+
+  Apart from film production, it is also a major tourist destination with live shows, film sets, and theme parks.
+
+  <br><br>
+
+  🔗 <a href="https://www.ramojifilmcity.com/" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+  `
+},
+
+{
+name:"Hussain Sagar",
+img:"hussain.jpg",
+
+gallery:[
+"hus1.jpg",
+"hus2.jpg",
+"hus3.jpg",
+"hus4.jpg"
+],
+
+info:`
+
+Hussain Sagar is a famous artificial lake located in the heart of Hyderabad. It was built in 1562 by Ibrahim Quli Qutb Shah during the rule of the Qutb Shahi dynasty. The lake was constructed to provide water supply to the city and surrounding areas.
+
+The lake is well known for the massive monolithic statue of Gautama Buddha located on Gibraltar Rock in the middle of the lake. This statue is one of the tallest monolithic Buddha statues in the world.
+
+Hussain Sagar connects the twin cities of Hyderabad and Secunderabad and is surrounded by popular tourist attractions like Lumbini Park, Necklace Road, and Tank Bund.
+
+Today the lake is one of the most iconic landmarks of Hyderabad and attracts visitors for boating, sightseeing, and evening walks along the scenic lakeside roads.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Hussain_Sagar" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Birla Mandir",
+img:"birla.jpg",
+
+gallery:[
+"bir1.jpg",
+"bir2.jpg",
+"bir3.jpg",
+"bir4.jpg"
+],
+
+info:`
+
+Birla Mandir is a beautiful Hindu temple located on the Naubath Pahad hill in Hyderabad. The temple was built by the Birla Foundation and was completed in the year 1976.
+
+The temple is dedicated to Lord Venkateswara, a form of Lord Vishnu. It is constructed entirely from white marble brought from Rajasthan, giving it a majestic and peaceful appearance.
+
+The architecture of the temple combines elements of North Indian, South Indian, and traditional Oriya temple styles. The temple also offers a panoramic view of the city and the nearby Hussain Sagar Lake.
+
+Birla Mandir is a major spiritual and tourist attraction in Hyderabad and is visited by thousands of devotees and tourists every year.
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Birla_Mandir" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+
+`
+
+},
+
+{
+name:"Warangal Fort",
+img:"warangal.jpg",
+
+gallery:[
+"war1.jpg",
+"war2.jpg",
+"war3.jpg",
+"war4.jpg"
+],
+
+info:`
+
+Warangal Fort is a historic fort located in Warangal city in Telangana. It was built in the 13th century during the reign of the Kakatiya dynasty and served as the capital of the Kakatiya kingdom.
+
+The fort is famous for its impressive stone gateways known as Kakatiya Kala Thoranams. These beautifully carved arches are considered symbols of the rich architectural heritage of Telangana.
+
+Although much of the fort now lies in ruins, the remaining structures reflect the grandeur of the Kakatiya rulers and their advanced architectural skills.
+
+Today Warangal Fort is an important historical site and attracts tourists, historians, and architecture enthusiasts from across India.
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Warangal_Fort" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+
+`
+
+},
+
+{
+name:"Ramappa Temple",
+img:"ramappa.jpg",
+
+gallery:[
+"ram1.jpg",
+"ram2.jpg",
+"ram3.jpg",
+"ram4.jpg"
+],
+
+info:`
+
+Ramappa Temple, also known as the Rudreshwara Temple, is located in Palampet village in Telangana. The temple was built in the 13th century during the rule of the Kakatiya dynasty.
+
+The temple is dedicated to Lord Shiva and is famous for its intricate carvings and floating bricks used in its construction. These lightweight bricks helped protect the temple structure during earthquakes.
+
+Ramappa Temple is considered a masterpiece of Kakatiya architecture and showcases detailed sculptures depicting mythological stories and cultural traditions.
+
+In 2021, the temple was declared a UNESCO World Heritage Site, making it one of the most significant cultural landmarks in Telangana.
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Ramappa_Temple" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+
+`
+
+},
+
+{
+name:"Yadadri Temple",
+img:"yadadri.jpg",
+
+gallery:[
+"yad1.jpg",
+"yad2.jpg",
+"yad3.jpg",
+"yad4.jpg"
+],
+
+info:`
+
+Yadadri Temple, also known as Yadagirigutta Temple, is a famous Hindu temple located near Hyderabad in Telangana. It is dedicated to Lord Narasimha, an incarnation of Lord Vishnu.
+
+The temple is situated on a hill and has recently undergone major redevelopment to transform it into one of the largest temple complexes in India.
+
+According to legends, the temple is associated with the sage Yadarishi who performed penance here to worship Lord Narasimha.
+
+Today Yadadri Temple is an important pilgrimage destination attracting devotees from across India.
+<br><br>
+
+🔗 <a href="https://en.wikipedia.org/wiki/Yadadri_Temple" target="_blank" style="color:blue; text-decoration:underline;">
+Visit Official Website
+</a>
+
+`
+
+},
+
+{
+name:"Kuntala Falls",
+img:"kuntala.jpg",
+
+gallery:[
+"kun1.jpg",
+"kun2.jpg",
+"kun3.jpg",
+"kun4.jpg"
+],
+
+info:`
+
+Kuntala Falls is the highest waterfall in the state of Telangana. It is located in the Adilabad district and is formed by the Kadam River.
+
+The waterfall cascades from a height of about 45 meters and is surrounded by dense forests and scenic landscapes.
+
+According to local legends, the waterfall is named after Shakuntala, a character from Indian mythology who is believed to have bathed in the river here.
+
+Today Kuntala Falls is one of the most popular nature tourist destinations in Telangana and attracts visitors especially during the monsoon season.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Kuntala_Waterfall" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Nagarjuna Sagar",
+img:"nagarjuna.jpg",
+
+gallery:[
+"nag1.jpg",
+"nag2.jpg",
+"nag3.jpg",
+"nag4.jpg"
+],
+
+info:`
+
+Nagarjuna Sagar is one of the largest masonry dams in the world and is located on the Krishna River. The dam was constructed between 1955 and 1967 as part of a major irrigation and hydroelectric project.
+
+The project was named after the ancient Buddhist scholar Nagarjuna who lived in this region many centuries ago.
+
+The dam created a large reservoir that supports irrigation for millions of acres of agricultural land in Telangana and Andhra Pradesh.
+
+Today Nagarjuna Sagar is also a popular tourist destination where visitors can enjoy boating and explore the nearby Nagarjunakonda island museum.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Nagarjuna_Sagar" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+}
+],
+
+rajasthan:[
+
+{
+name:"Hawa Mahal",
+img:"hawa.jpg",
+
+gallery:[
+"ha1.jpg",
+"ha2.jpg",
+"ha3.jpg",
+"ha4.jpg"
+],
+
+info:`
+
+Hawa Mahal, also known as the "Palace of Winds", is one of the most iconic landmarks of Jaipur in Rajasthan. It was built in 1799 by Maharaja Sawai Pratap Singh of the Kachwaha Rajput dynasty. The palace was designed by the architect Lal Chand Ustad.
+
+The unique five-story structure is made of red and pink sandstone and features 953 small windows called "jharokhas". These windows allowed royal women to observe street festivals and daily life without being seen by the public.
+
+The design of Hawa Mahal allows cool air to circulate throughout the palace, which helped keep the interior comfortable during the hot desert summers of Rajasthan.
+
+Today Hawa Mahal is one of the most visited tourist attractions in Jaipur and represents the rich cultural and architectural heritage of Rajasthan.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Kuntala_Waterfall" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Amber Fort",
+img:"amber.jpg",
+
+gallery:[
+"am1.jpg",
+"am2.jpg",
+"am3.jpg",
+"am4.jpg"
+],
+
+info:`
+
+Amber Fort, also known as Amer Fort, is a magnificent hilltop fort located near Jaipur in Rajasthan. The fort was built in the late 16th century by Raja Man Singh I, one of the most trusted generals of the Mughal Emperor Akbar.
+
+The fort is known for its grand architecture that combines Hindu and Mughal design elements. It features beautiful courtyards, palaces, temples, and gardens made from red sandstone and white marble.
+
+One of the most famous parts of Amber Fort is the Sheesh Mahal, also known as the Mirror Palace. The walls and ceilings of this hall are decorated with thousands of tiny mirrors that reflect light beautifully.
+
+Today Amber Fort is a UNESCO World Heritage Site and attracts tourists from around the world who come to experience its history, architecture, and panoramic views of the surrounding hills.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Amber_Fort" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Jaisalmer Fort",
+img:"jaisalmer.jpg",
+
+gallery:[
+"jai1.jpg",
+"jai2.jpg",
+"jai3.jpg",
+"jai4.jpg"
+],
+
+info:`
+
+Jaisalmer Fort is one of the largest and most spectacular forts in India. It is located in the city of Jaisalmer in the Thar Desert of Rajasthan. The fort was built in 1156 AD by the Rajput ruler Rawal Jaisal.
+
+The fort is constructed from yellow sandstone, which gives it a golden appearance especially during sunset. Because of this unique glow, it is often called the "Golden Fort".
+
+Unlike many other forts in India, Jaisalmer Fort is a living fort where thousands of people still reside within its walls. The fort contains houses, temples, shops, and restaurants.
+
+Today Jaisalmer Fort is a UNESCO World Heritage Site and remains one of the most popular tourist attractions in Rajasthan.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Jaisalmer_Fort" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"City Palace Jaipur",
+img:"city.jpg",
+
+gallery:[
+"ci1.jpg",
+"ci2.jpg",
+"ci3.jpg",
+"ci4.jpg"
+],
+
+info:`
+
+City Palace is a grand royal palace located in the heart of Jaipur, Rajasthan. It was built by Maharaja Sawai Jai Singh II when he founded the city of Jaipur in the early 18th century.
+
+The palace complex is a beautiful blend of Rajput, Mughal, and European architectural styles. It consists of several courtyards, gardens, palaces, and temples within its massive walls.
+
+One of the most famous attractions within the complex is the Chandra Mahal, which still serves as the residence of the royal family of Jaipur.
+
+Today part of the City Palace has been converted into a museum where visitors can explore royal costumes, weapons, and historical artifacts from the royal era.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/City_Palace_Jaipur" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Lake Palace Udaipur",
+img:"lake.jpg",
+
+gallery:[
+"la1.jpg",
+"la2.jpg",
+"la3.jpg",
+"la4.jpg"
+],
+
+info:`
+
+The Lake Palace is a magnificent palace located on Jag Niwas Island in Lake Pichola in the city of Udaipur, Rajasthan. It was built in 1746 by Maharana Jagat Singh II of the Mewar dynasty.
+
+The palace was originally used as a summer retreat for the royal family. Its white marble architecture appears to float on the surface of the lake, creating a breathtaking view.
+
+The palace features beautiful courtyards, fountains, terraces, and gardens that reflect the elegance of Rajput architecture.
+
+Today the Lake Palace has been converted into a luxury heritage hotel and is considered one of the most romantic and beautiful hotels in the world.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Lake_Palace" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Mehrangarh Fort",
+img:"mehranghar.jpg",
+
+gallery:[
+"meh1.jpg",
+"meh2.jpg",
+"meh3.jpg",
+"meh4.jpg"
+],
+
+info:`
+
+Mehrangarh Fort is one of the largest and most impressive forts in India. It is located on a rocky hill overlooking the city of Jodhpur in Rajasthan.
+
+The fort was built in 1459 by Rao Jodha, the founder of Jodhpur. It stands about 400 feet above the surrounding city and provides spectacular views of the famous blue houses of Jodhpur.
+
+Inside the fort are several beautiful palaces decorated with intricate carvings, mirrors, and paintings that showcase the luxury of the Rajput rulers.
+
+Today Mehrangarh Fort houses a museum displaying royal artifacts, weapons, and historical collections that tell the story of Rajasthan’s royal heritage.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Mehrangarh_Fort" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Pushkar Lake",
+img:"pushkar.jpg",
+
+gallery:[
+"pus1.jpg",
+"pus2.jpg",
+"pus3.jpg",
+"pus4.jpg"
+],
+
+info:`
+
+Pushkar Lake is a sacred lake located in the town of Pushkar in Rajasthan. According to Hindu mythology, the lake was created when Lord Brahma dropped a lotus flower on the ground.
+
+The lake is surrounded by more than 50 ghats and hundreds of temples, making it one of the most important pilgrimage sites for Hindus.
+
+One of the most famous temples near the lake is the Brahma Temple, which is one of the very few temples dedicated to Lord Brahma in the world.
+
+Every year thousands of pilgrims and tourists visit Pushkar Lake, especially during the famous Pushkar Camel Fair.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Pushkar_Lake" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Chittorgarh Fort",
+img:"chittorgarh-fort.jpg",
+
+gallery:[
+"chi1.jpg",
+"chi2.jpg",
+"chi3.jpg",
+"chi4.jpg"
+],
+
+info:`
+
+Chittorgarh Fort is the largest fort in India and one of the most historic forts in Rajasthan. It was the capital of the Mewar kingdom and represents the bravery and sacrifice of the Rajput warriors.
+
+The fort has witnessed several historic battles, including the sieges by Alauddin Khilji and the Mughal emperor Akbar.
+
+Inside the fort complex are many historical monuments such as the Vijay Stambh (Victory Tower), Kirti Stambh, palaces, and temples.
+
+Today Chittorgarh Fort stands as a symbol of Rajput pride and courage and is recognized as a UNESCO World Heritage Site.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Chittorgarh_Fort" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Ranthambore National Park",
+img:"ranthambore.jpg",
+
+gallery:[
+"ran1.jpg",
+"ran2.jpg",
+"ran3.jpg",
+"ran4.jpg"
+],
+
+info:`
+
+Ranthambore National Park is one of the most famous wildlife reserves in India and is located in the Sawai Madhopur district of Rajasthan.
+
+The park was once the hunting ground of the Maharajas of Jaipur before it was declared a wildlife sanctuary in 1955 and later became a national park.
+
+Ranthambore is especially famous for its population of Bengal tigers, making it one of the best places in India to see tigers in the wild.
+
+Apart from tigers, the park is home to many other animals such as leopards, deer, crocodiles, and hundreds of bird species.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Ranthambore_National_Park" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+},
+
+{
+name:"Mount Abu",
+img:"mount.jpg",
+
+gallery:[
+"mou1.jpg",
+"mou2.jpg",
+"mou3.jpg",
+"mou4.jpg"
+],
+
+info:`
+
+Mount Abu is the only hill station in the desert state of Rajasthan and is located in the Aravalli mountain range.
+
+It was once a summer retreat for the royal families of Rajasthan because of its pleasant climate and scenic surroundings.
+
+One of the most famous attractions in Mount Abu is the Dilwara Temples, which are known for their extraordinary marble carvings.
+
+The town also features beautiful natural spots such as Nakki Lake, Sunset Point, and Guru Shikhar, the highest peak in the Aravalli range.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Mount_Abu" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+}
+
+],
+
+kerala:[
+
+{
+name:"Munnar",
+img:"munnar.jpg",
+
+gallery:[
+"munnar1.jpg",
+"munnar2.jpg",
+"munnar3.jpg",
+"munnar4.jpg"
+],
+
+info:` Munnar is one of the most famous hill stations in India located in the Western Ghats of Kerala. The region became popular during the British colonial period when the British established tea plantations in the late 19th century. The name "Munnar" means "three rivers", referring to the meeting point of the Mudhirapuzha, Nallathanni, and Kundaly rivers.
+
+The hill station is known for its vast rolling tea gardens that stretch across the mountains. These plantations were developed by British planters who recognized the region’s cool climate as ideal for growing tea. Even today, tea production remains one of the most important economic activities in the area.
+
+Munnar is surrounded by misty mountains, waterfalls, and wildlife sanctuaries such as Eravikulam National Park, which is home to the rare Nilgiri Tahr. The region is also famous for the Neelakurinji flowers that bloom once every 12 years and cover the hills in blue.
+
+Today Munnar attracts thousands of tourists every year who come to enjoy its pleasant weather, scenic landscapes, and peaceful natural environment. It remains one of the most beautiful hill destinations in South India.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Munnar" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+ 
+},
+
+{
+name:"Alleppey",
+img:"alleppey.jpg",
+
+gallery:[
+"alle1.jpg",
+"alle2.jpg",
+"alle3.jpg",
+"alle4.jpg"
+],
+
+info:` Alleppey, officially known as Alappuzha, is one of the most famous tourist destinations in Kerala and is widely known for its beautiful backwaters. The town was developed in the 18th century by Raja Kesava Das, the Dewan of the Travancore Kingdom, who transformed it into an important trading port.
+
+The backwaters of Alleppey consist of a network of canals, lagoons, and lakes that stretch across the region. These waterways have been used for centuries as transportation routes for local people and traders moving goods like spices and coconut products.
+
+Today Alleppey is best known for its traditional houseboats called "Kettuvallams". These boats were originally used to transport rice and spices but have now been converted into luxurious floating hotels for tourists.
+
+Visitors travel through the calm waters while enjoying views of coconut trees, paddy fields, and small villages. Because of its unique water-based landscape, Alleppey is often called the "Venice of the East".
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Alappuzha" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+  {
+    name: "Kochi",
+    img: "kochi.jpg",
+
+    gallery: [
+      "ko1.jpg",
+      "ko2.jpg",
+      "ko3.jpg",
+      "ko4.jpg"
+    ],
+
+    info: `
+    Kochi, also known as Cochin, is a historic port city located on the southwest coast of India in Kerala.
+
+    <br><br>
+
+    The city has been an important center for international trade since ancient times because of its strategic location along major sea routes.
+
+    <br><br>
+
+    Throughout history Kochi attracted traders from Arabia, China, Europe, and the Middle East who came to buy spices such as pepper, cinnamon, and cardamom.
+
+    <br><br>
+
+    One of the most famous landmarks in Kochi is the Chinese fishing nets that line the waterfront of Fort Kochi.
+
+    <br><br>
+
+    Kochi today is a vibrant city that combines historical heritage with modern development.
+
+    <br><br>
+
+    🔗 <a href="https://en.wikipedia.org/wiki/Kochi" target="_blank" style="color:#007BFF; font-weight:bold;">
+    Visit Official Website
+    </a>
+    `
+  },
+
+
+{
+name:"Wayanad",
+img:"wayanand.jpg",
+
+gallery:[
+"wa1.jpg",
+"wa2.jpg",
+"wa3.jpg",
+"wa4.jpg"
+],
+
+info:` Wayanad is a beautiful hill district located in the Western Ghats of Kerala. It is known for its dense forests, waterfalls, and wildlife sanctuaries. The region has a rich history and was once ruled by several tribal communities and local kings. Wayanad is home to many natural attractions including Edakkal Caves, Banasura Sagar Dam, and Chembra Peak. Today it is a popular destination for nature lovers, trekkers, and wildlife enthusiasts.
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Wayanad" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Thekkady",
+img:"thekaddy.jpg",
+
+gallery:[
+"thek1.jpg",
+"thek2.jpg",
+"thek3.jpg",
+"thek4.jpg"
+],
+
+info:` Thekkady is a famous tourist destination in Kerala known for the Periyar Wildlife Sanctuary. The sanctuary is home to elephants, tigers, deer, and many species of birds and reptiles. Visitors can enjoy boat rides on Periyar Lake to observe wildlife in their natural habitat. Thekkady is also known for spice plantations where visitors can see the cultivation of cardamom, pepper, and other spices. Today Thekkady is one of the best wildlife tourism destinations in South India.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Thekkady" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+` 
+
+},
+
+
+
+{
+name:"Varkala Beach",
+img:"varkal.jpg",
+
+gallery:[
+"var1.jpg",
+"var2.jpg",
+"var3.jpg",
+"var4.jpg"
+],
+
+info:` Varkala Beach is one of the most beautiful beaches in Kerala and is famous for its unique cliff formations along the Arabian Sea. The beach is considered sacred and many pilgrims visit the nearby Janardanaswamy Temple. The cliffs of Varkala offer stunning views of the sea and are lined with cafes, shops, and resorts. Tourists come here to relax, enjoy sunsets, and experience the peaceful coastal atmosphere.
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Varkala_Beach" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Kovalam Beach",
+img:"kovalam.jpg",
+
+gallery:[
+"kov1.jpg",
+"kov2.jpg",
+"kov3.jpg",
+"kov4.jpg"
+],
+
+info: `Kovalam Beach is one of the most famous beach destinations in Kerala located near the capital city Thiruvananthapuram. The beach is known for its crescent-shaped coastline and calm waters. Kovalam became popular among international tourists in the 1970s and has since developed into a major resort destination. The iconic lighthouse near the beach provides breathtaking views of the Arabian Sea.
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Kovalam_Beach" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Athirapally Falls",
+img:"athirapally.jpg",
+
+gallery:[
+"athi1.jpg",
+"athi2.jpg",
+"athi3.jpg",
+"athi4.jpg"
+],
+
+info:` Athirapally Falls is the largest waterfall in Kerala and is often called the “Niagara of India”. It is located in the Thrissur district and flows from the Chalakudy River. The waterfall cascades from a height of about 80 feet surrounded by dense forests and wildlife. Athirapally is a popular filming location for many Indian movies because of its breathtaking natural beauty.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Athirapally_Falls" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Bekal Fort",
+img:"bekal.jpg",
+
+gallery:[
+"be1.jpg",
+"be2.jpg",
+"be3.jpg",
+"be4.jpg"
+],
+
+info:` Bekal Fort is the largest fort in Kerala and is located in the Kasaragod district along the Arabian Sea. The fort was built in the 17th century and served as an important military stronghold. Its massive walls and watchtowers offer spectacular views of the sea and surrounding beaches. Today Bekal Fort is a major historical attraction and a popular filming location for movies.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Bekal_Fort" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+  </a>
+`
+
+},
+
+{
+name:"Silent Valley",
+img:"silent.jpg",
+
+gallery:[
+"si1.jpg",
+"si2.jpg",
+"si3.jpg",
+"si4.jpg"
+],
+
+info:` Silent Valley National Park is one of the most pristine tropical rainforests in India located in the Nilgiri hills of Kerala. The park is known for its rich biodiversity and untouched natural environment. It is home to many rare and endangered species including the lion-tailed macaque. Silent Valley is considered one of the most important ecological reserves in India and is protected to preserve its unique wildlife and forests.
+
+<br><br>
+  🔗 <a href="https://en.wikipedia.org/wiki/Silent_Valley_National_Park" target="_blank" style="color:blue; text-decoration:underline;">
+  Visit Official Website
+
+  </a>
+`
+
+}
+
+],
+
+himachal:[
+
+{
+name:"Manali",
+img:"manali.jpg",
+
+gallery:[
+"mana1.jpg",
+"mana2.jpg",
+"mana3.jpg",
+"mana4.jpg"
+],
+
+info:`Manali is one of the most popular hill stations in Himachal Pradesh located in the Kullu Valley. It is surrounded by snow-capped mountains, rivers, and forests. Manali is famous for adventure sports like paragliding, skiing, river rafting, and trekking.
+
+Rohtang Pass and Solang Valley are major tourist attractions near Manali. Tourists also visit Hadimba Temple and Old Manali for scenic beauty.
+
+Manali is one of the most visited honeymoon destinations in India.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Manali,_Himachal_Pradesh" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Shimla",
+img:"shimla.jpg",
+
+gallery:[
+"shi1.jpg",
+"shi2.jpg",
+"shi3.jpg",
+"shi4.jpg"
+],
+
+info:`Shimla is the capital city of Himachal Pradesh and one of the most famous hill stations in India. It was the summer capital of British India. Shimla is known for its pleasant climate and scenic beauty.
+
+Mall Road, Ridge, Kufri, and Jakhoo Temple are major tourist attractions. Shimla also offers toy train rides and colonial architecture.
+
+Shimla attracts tourists throughout the year.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Shimla" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Dharamshala",
+img:"dharamshala.jpg",
+
+gallery:[
+"dha1.jpg",
+"dha2.jpg",
+"dha3.jpg",
+"dha4.jpg"
+],
+
+info:`Dharamshala is a beautiful hill town known for its Tibetan culture and scenic landscapes. It is also home to the Dalai Lama. The town is divided into Lower Dharamshala and McLeod Ganj.
+
+Tourists visit Bhagsu Waterfall, Dal Lake, and Namgyal Monastery.
+
+Dharamshala is perfect for peaceful vacations.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Dharamshala" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Spiti Valley",
+img:"spiti.jpg",
+
+gallery:[
+"spi1.jpg",
+"spi2.jpg",
+"spi3.jpg",
+"spi4.jpg"
+],
+
+info:`Spiti Valley is a cold desert mountain valley located in Himachal Pradesh. It is known for its monasteries, landscapes, and adventure tourism.
+
+Key Monastery, Chandratal Lake, and Kaza are popular tourist spots.
+
+Spiti is one of the most scenic destinations in India.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Spiti_Valley" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Kullu",
+img:"kullu.jpg",
+
+gallery:[
+"kul1.jpg",
+"kul.jpg",
+"kul3.jpg",
+"kul4.jpg"
+],
+
+info:`Kullu is a beautiful valley famous for temples, hills, and adventure sports. It is also known as the Valley of Gods.
+
+River rafting and trekking are popular here.
+
+Kullu Dussehra festival attracts thousands of tourists.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Kullu" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Dalhousie",
+img:"dalhousie.jpg",
+
+gallery:[
+"dal1.jpg",
+"dal2.jpg",
+"dal3.jpg",
+"dal4.jpg"
+],
+
+info:`Dalhousie is a peaceful hill station known for its colonial architecture and natural beauty.
+
+Khajjiar, Panchpula, and Dainkund Peak are popular attractions.
+
+Dalhousie offers scenic views and peaceful environment.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Dalhousie,_India" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Kasol",
+img:"kasol.jpg",
+
+gallery:[
+"ka1.jpg",
+"ka2,jpg.jpg",
+"ka3.jpg",
+"ka4.jpg"
+],
+
+info:`Kasol is a small village in Himachal Pradesh known for its natural beauty and trekking routes.
+
+It is popular among backpackers and nature lovers.
+
+Parvati Valley and Kheerganga Trek are major attractions.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Kasol" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Kasauli",
+img:"kasauli.jpg",
+
+gallery:[
+"kas1.jpg",
+"kas2.jpg",
+"kas3.jpg",
+"kas4.jpg"
+],
+
+info:`Kasauli is a quiet hill station located near Chandigarh. It is known for its peaceful environment and scenic views.
+
+Monkey Point and Christ Church are major attractions.
+
+Kasauli is perfect for relaxation.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Kasauli" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Chamba",
+img:"chamba.jpg",
+
+gallery:[
+"cha1.jpg",
+"cha2.jpg",
+"cha3.jpg",
+"cha43.jpg"
+],
+
+info:`Chamba is known for temples, valleys, and historical heritage.
+
+Khajjiar is located near Chamba and is called Mini Switzerland.
+
+Chamba is rich in culture and tradition.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Chamba,_Himachal_Pradesh" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Khajjiar",
+img:"khajjiar.jpg",
+
+gallery:[
+"kha1.jpg",
+"kha2.jpg",
+"kha3.jpg",
+"kha4.jpg"
+],
+
+info:`Khajjiar is known as the Mini Switzerland of India. It is surrounded by forests and mountains.
+
+Tourists visit for nature walks and adventure sports.
+
+Khajjiar is one of the most beautiful places in Himachal Pradesh.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Khajjiar" target="_blank">
+Visit Official Website
+</a>
+`
+}
+
+],
+
+kashmir:[
+
+{
+name:"Srinagar",
+img:"srinagar.jpg",
+
+gallery:[
+"sri1.jpg",
+"sri2.jpg",
+"sri3.jpg",
+"sri4.jpg"
+],
+
+info:`Srinagar is the summer capital of Jammu and Kashmir and one of the most beautiful destinations in India. It is famous for its lakes, gardens, and houseboats.
+
+Dal Lake, Mughal Gardens, and Shikara rides are major attractions. Tourists also enjoy local Kashmiri culture and handicrafts.
+
+Srinagar is often called the "Paradise on Earth".
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Srinagar" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Gulmarg",
+img:"gulmarg.jpg",
+
+gallery:[
+"gul1.jpg",
+"gul2.jpg",
+"gul3.jpg",
+"gul4.jpg"
+],
+
+info:`Gulmarg is a popular hill station known for skiing and snow activities. It is surrounded by snow-covered mountains and meadows.
+
+Gulmarg Gondola is one of the highest cable cars in the world.
+
+Tourists visit Gulmarg for winter sports and scenic beauty.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Gulmarg" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Pahalgam",
+img:"pahalgam.jpg",
+
+gallery:[
+"pa1.jpg",
+"pa2.jpg",
+"pa3.jpg",
+"pa4.jpg"
+],
+
+info:`Pahalgam is a scenic hill station located along the Lidder River. It is known for lush greenery and mountains.
+
+Betaab Valley and Aru Valley are major attractions.
+
+Pahalgam is also a starting point for Amarnath Yatra.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Pahalgam" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Sonamarg",
+img:"sonamarg.jpg",
+
+gallery:[
+"son1.jpg",
+"son2.jpg",
+"son3.jpg",
+"son4.jpg"
+],
+
+info:`Sonamarg means "Meadow of Gold". It is surrounded by glaciers and mountains.
+
+Tourists enjoy trekking, camping, and river rafting.
+
+Sonamarg is one of the most scenic destinations in Kashmir.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Sonamarg" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Leh Ladakh",
+img:"ladakh.jpg",
+
+gallery:[
+"lad1.jpg",
+"lad2.jpg",
+"lad3.jpg",
+"lad4.jpg"
+],
+
+info:`Ladakh is known for mountains, monasteries, and landscapes. It is one of the most adventurous travel destinations.
+
+Pangong Lake and Nubra Valley are major attractions.
+
+Ladakh attracts bikers and adventure lovers.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Ladakh" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Dal Lake",
+img:"dallake.jpg",
+
+gallery:[
+"dall1.jpg",
+"dall2.jpg",
+"dall3.jpg",
+"dall4.jpg"
+],
+
+info:`Dal Lake is one of the most famous lakes in Srinagar. It is known for houseboats and Shikara rides.
+
+Tourists enjoy floating markets and scenic views.
+
+Dal Lake is one of the main attractions in Kashmir.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Dal_Lake" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Amarnath",
+img:"amarnath.jpg",
+
+gallery:[
+"amar1.jpg",
+"amar2.jpg",
+"amar3.jpg",
+"amar4.jpg"
+],
+
+info:`Amarnath is a famous pilgrimage site dedicated to Lord Shiva. It is located in the Himalayas.
+
+Thousands of devotees visit every year.
+
+The Amarnath cave contains natural ice Shiva Lingam.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Amarnath_Temple" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Patnitop",
+img:"patnitop.jpg",
+
+gallery:[
+"patni1.jpg",
+"patni2.jpg",
+"patni3.jpg",
+"patni4.jpg"
+],
+
+info:`Patnitop is a hill station known for scenic landscapes and adventure sports.
+
+Tourists enjoy paragliding, trekking, and snowfall.
+
+Patnitop offers peaceful nature views.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Patnitop" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Nubra Valley",
+img:"nubra.jpg",
+
+gallery:[
+"nubra1.jpg",
+"nubra2.jpg",
+"nubra3.jpg",
+"nubra4.jpg"
+],
+
+info:`Nubra Valley is known for sand dunes and mountains. It is one of the most unique destinations.
+
+Tourists enjoy camel rides and scenic landscapes.
+
+Nubra Valley is located in Ladakh.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Nubra_Valley" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Pangong Lake",
+img:"pangong.jpg",
+
+gallery:[
+"pangong1.jpg",
+"pangong.jpg",
+"pangong3.jpg",
+"pangong4.jpg"
+],
+
+info:`Pangong Lake is one of the highest lakes in the world. It is famous for changing colors.
+
+The lake became popular after Bollywood movies.
+
+Pangong Lake is a must visit destination.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Pangong_Tso" target="_blank">
+Visit Official Website
+</a>
+`
+}
+
+],
+
+sikkim:[
+
+{
+name:"Gangtok",
+img:"gangtok.jpg",
+
+gallery:[
+"gan1.jpg",
+"gan2.jpg",
+"gan3.jpg",
+"gan4.jpg"
+],
+
+info:`Gangtok is the capital city of Sikkim and one of the most beautiful hill stations in Northeast India. It is surrounded by mountains and offers stunning views of the Kanchenjunga range.
+
+Gangtok is famous for monasteries, viewpoints, and cultural attractions. Popular tourist places include MG Marg, Tashi View Point, and Enchey Monastery.
+
+Gangtok attracts tourists for its peaceful environment and scenic beauty.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Gangtok" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Tsomgo Lake",
+img:"tsomgo.jpg",
+
+gallery:[
+"ts1.jpg",
+"ts2.jpg",
+"ts3.jpg",
+"ts4.jpg"
+],
+
+info:`Tsomgo Lake is a glacial lake located at high altitude near Gangtok. The lake remains frozen during winter and reflects beautiful surroundings.
+
+Tourists enjoy yak rides and scenic views.
+
+It is one of the most famous tourist attractions in Sikkim.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Tsomgo_Lake" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Nathula Pass",
+img:"nathula.jpg",
+
+gallery:[
+"na1.jpg",
+"na2.jpg",
+"na3.jpg",
+"na4.jpg"
+],
+
+info:`Nathula Pass is a mountain pass connecting India and China. It is located at a very high altitude and offers breathtaking views.
+
+Tourists visit for snow-covered mountains and scenic landscapes.
+
+Nathula Pass is one of the top tourist destinations in Sikkim.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Nathu_La" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Pelling",
+img:"pelling.jpg",
+
+gallery:[
+"pe1.jpg",
+"pe2.jpg",
+"pe3.jpg",
+"pe4.jpg"
+],
+
+info:`Pelling is a beautiful hill town known for Kanchenjunga mountain views. It is famous for monasteries and waterfalls.
+
+Skywalk and Pemayangtse Monastery are major attractions.
+
+Pelling is perfect for nature lovers.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Pelling" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Yumthang Valley",
+img:"yumthang.jpg",
+
+gallery:[
+"yum1.jpg",
+"yum2.jpg",
+"yum3.jpg",
+"yum4.jpg"
+],
+
+info:`Yumthang Valley is known as the Valley of Flowers. It is surrounded by mountains and rivers.
+
+The valley is famous for colorful flowers and hot springs.
+
+It is one of the most scenic places in Sikkim.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Yumthang_Valley" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Lachung",
+img:"lachung.jpg",
+
+gallery:[
+"lac1.jpg",
+"lac2.jpg",
+"lac3.jpg",
+"lac4.jpg"
+],
+
+info:`Lachung is a mountain village in North Sikkim. It is surrounded by waterfalls and mountains.
+
+Lachung is the gateway to Yumthang Valley.
+
+It is one of the most peaceful destinations in Sikkim.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Lachung" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Namchi",
+img:"namchi.jpg",
+
+gallery:[
+"nam1.jpg",
+"nam2.jpg",
+"nam3.jpg",
+"nam4.jpg"
+],
+
+info:`Namchi is a famous tourist destination known for temples and scenic beauty.
+
+Char Dham and Samdruptse Hill are major attractions.
+
+Namchi offers beautiful mountain views.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Namchi" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Ravangla",
+img:"ravangla.jpg",
+
+gallery:[
+"rav1.jpg",
+"rav2.jpg",
+"rav3.jpg",
+"rav4.jpg"
+],
+
+info:`Ravangla is a small town in South Sikkim known for Buddha Park.
+
+Tourists visit for scenic views and peaceful environment.
+
+Ravangla is perfect for nature lovers.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Ravangla" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Zuluk",
+img:"zuluk.jpg",
+
+gallery:[
+"zu1.jpg",
+"zu2.jpg",
+"zu3.jpg",
+"zu4.jpg"
+],
+
+info:`Zuluk is a small mountain village located in East Sikkim. It is known for its winding roads and mountain views.
+
+Zuluk is famous for sunrise views.
+
+It is one of the hidden gems of Sikkim.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Zuluk" target="_blank">
+Visit Official Website
+</a>
+`
+},
+
+{
+name:"Gurudongmar Lake",
+img:"gurudongmar.jpg",
+
+gallery:[
+"guru1.jpg",
+"guru2.jpg",
+"guru3.jpg",
+"guru4.jpg"
+],
+
+info:`Gurudongmar Lake is one of the highest lakes in the world. It is located in North Sikkim.
+
+The lake is considered sacred by Buddhists and Sikhs.
+
+Gurudongmar Lake offers breathtaking views.
+
+<br><br>
+🔗 <a href="https://en.wikipedia.org/wiki/Gurudongmar_Lake" target="_blank">
+Visit Official Website
+</a>
+`
+}
+
+],
+
+
+};
+
+
+
+/* SHOW PLACES */
+
+function showPlaces(state){
+
+const container=document.getElementById("placesContainer");
+
+container.innerHTML="";
+
+if(!data[state]) return;
+
+data[state].forEach(place=>{
+
+container.innerHTML+=`
+
+<div class="card" onclick='openPopup(${JSON.stringify(place)})'>
+
+<img src="${place.img}">
+
+<h3 style="padding:10px">${place.name}</h3>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* OPEN POPUP */
+
+function openPopup(place){
+
+document.getElementById("popup").style.display="block";
+
+document.getElementById("popupTitle").innerText=place.name;
+
+document.getElementById("popupText").innerHTML=place.info;
+
+let imgs="";
+
+place.gallery.forEach(img=>{
+imgs+=`<img src="${img}" onclick="openImageViewer('${img}')">`;
+});
+
+document.getElementById("popupImages").innerHTML=imgs;
+
+}
+
+
+/* CLOSE POPUP */
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+imgs+=`<img src="${img}" onclick="openImageViewer('${img}')">`;
+/* DRAGGABLE POPUP */
+
+const popup=document.getElementById("popup");
+
+let isDragging=false;
+
+let offsetX,offsetY;
+
+popup.addEventListener("mousedown",(e)=>{
+isDragging=true;
+offsetX=e.clientX-popup.offsetLeft;
+offsetY=e.clientY-popup.offsetTop;
+});
+
+document.addEventListener("mousemove",(e)=>{
+if(isDragging){
+popup.style.left=(e.clientX-offsetX)+"px";
+popup.style.top=(e.clientY-offsetY)+"px";
+popup.style.transform="none";
+}
+});
+
+document.addEventListener("mouseup",()=>{
+isDragging=false;
+});
+
+const viewer=document.getElementById("imageViewer");
+
+let dragging=false;
+let offX,offY;
+
+viewer.addEventListener("mousedown",(e)=>{
+dragging=true;
+offX=e.clientX-viewer.offsetLeft;
+offY=e.clientY-viewer.offsetTop;
+});
+
+document.addEventListener("mousemove",(e)=>{
+if(dragging){
+viewer.style.left=(e.clientX-offX)+"px";
+viewer.style.top=(e.clientY-offY)+"px";
+viewer.style.transform="none";
+}
+});
+
+document.addEventListener("mouseup",()=>{
+dragging=false;
+});
+</script>
+
+</body>
+</html>

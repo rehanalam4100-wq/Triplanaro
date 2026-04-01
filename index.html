@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Triplanoro Login</title>
+
+<link rel="icon" type="image/png" href="trip logo.png">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background-size:cover;
+background-position:center;
+transition:1s ease-in-out;
+
+}
+
+/* Overlay */
+
+.overlay{
+
+position:absolute;
+height:100%;
+width:100%;
+background:rgba(0,0,0,0.6);
+
+}
+
+/* Login Box */
+
+.container{
+
+position:relative;
+z-index:2;
+background:rgba(255,255,255,0.1);
+padding:40px;
+border-radius:15px;
+backdrop-filter:blur(10px);
+color:white;
+width:350px;
+text-align:center;
+
+}
+
+h2{
+
+margin-bottom:20px;
+
+}
+
+input{
+
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+
+}
+
+button{
+
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#0077b6;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:#023e8a;
+
+}
+
+.success{
+
+margin-top:15px;
+color:#00ffcc;
+font-weight:bold;
+
+}
+
+/* Forgot Password Box */
+
+.forgot-box{
+
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,0.8);
+padding:30px;
+border-radius:12px;
+display:none;
+z-index:1000;
+color:white;
+text-align:center;
+width:300px;
+
+}
+
+.forgot-box input{
+
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+
+}
+
+.forgot-box button{
+
+width:100%;
+padding:10px;
+margin-top:10px;
+background:#0077b6;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+
+}
+
+.close-btn{
+background:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+<h2>Welcome to Triplanoro</h2>
+
+<input type="text" id="username" placeholder="Username" required>
+
+<input type="password" id="password" placeholder="Password" required>
+
+<button onclick="login()">Login</button>
+
+<div class="success" id="message"></div>
+<p style="margin-top:10px;">
+<a href="#" onclick="openForgot()" style="color:#00e5ff;">
+Forgot Password?
+</a>
+</p>
+
+<div id="forgotBox" class="forgot-box">
+
+<h3>Reset Credentials</h3>
+
+<input type="text" id="newUser" placeholder="New Username">
+<input type="password" id="newPass" placeholder="New Password">
+
+<button onclick="resetCredentials()">Update</button>
+
+<button onclick="closeForgot()" class="close-btn">Cancel</button>
+
+</div>
+
+</div>
+
+<script>
+    function openForgot(){
+document.getElementById("forgotBox").style.display="block";
+}
+
+function closeForgot(){
+document.getElementById("forgotBox").style.display="none";
+}
+
+function resetCredentials(){
+
+let newUser=document.getElementById("newUser").value;
+let newPass=document.getElementById("newPass").value;
+
+if(newUser=="" || newPass==""){
+
+alert("Please fill all fields");
+return;
+
+}
+
+localStorage.setItem("username",newUser);
+localStorage.setItem("password",newPass);
+
+alert("Credentials Updated Successfully");
+
+closeForgot();
+
+}
+
+/* Background Images */
+
+const images = [
+
+"b1.jpg",
+"b2.jpg",
+"b3.jpg",
+"b4.jpg",
+"b5.jpg",
+"lad4.jpg",
+"kas3.jpg"
+
+];
+
+let i=0;
+
+function changeBackground(){
+
+document.body.style.backgroundImage="url('"+images[i]+"')";
+
+i++;
+
+if(i==images.length){
+
+i=0;
+
+}
+
+}
+
+setInterval(changeBackground,4000);
+
+changeBackground();
+
+/* Login System */
+
+function login(){
+
+let username=document.getElementById("username").value;
+
+let password=document.getElementById("password").value;
+
+let savedUser=localStorage.getItem("username");
+
+let savedPass=localStorage.getItem("password");
+
+if(savedUser==null){
+
+localStorage.setItem("username",username);
+localStorage.setItem("password",password);
+
+document.getElementById("message").innerHTML="Login Successful";
+
+setTimeout(()=>{
+
+window.location.href="first.html";
+
+},1500);
+
+}
+
+else{
+
+if(username==savedUser && password==savedPass){
+
+document.getElementById("message").innerHTML="Login Successful";
+
+setTimeout(()=>{
+
+window.location.href="first page.html";
+
+},1500);
+
+}
+
+else{
+
+document.getElementById("message").innerHTML="Invalid Credentials";
+
+}
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
